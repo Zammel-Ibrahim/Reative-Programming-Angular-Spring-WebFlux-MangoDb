@@ -1,0 +1,7 @@
+<h4>Message Details</h4>
+<div *ngIf="quote">
+  <blockquote>
+    <p>{{quote.content}}</p>
+    <footer>{{quote.book}} (Quote identifier: {{quote.id}})</footer>
+  </blockquote>
+</div>

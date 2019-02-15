@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-8">
+    <p>
+      <label>Pagination:
+        <input type="checkbox" [checked]="pagination" (change)="pagination = !pagination" >
+        <label>Page range: 
+          <input type="text" [(ngModel)]="page" size="2">
+        </label>
+        <label>Page Size:
+          <input type="text" [(ngModel)]="size" size="2">
+        </label>
+      </label>
+      <button (click)="requestQuoteStream()">Reactive Request</button>
+      <button (click)="requestQuoteBlocking()">Standard  Request</button>
+    </p>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Message ID</th>
+        <th>Categery</th>
+        <th>Message content</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let quote of quotes | async" [class.success]="quote === selectedQuote" (click)="onSelectQuote(quote)"
+      (mouseover)="onMouseOver(quote)" 
+      [ngClass] = "{'highlight' : quote === selectedQuote}">
+        <td>{{quote.id}}</td>
+        <td>{{quote.book}}</td>
+        <td>{{quote.content.substr(0, 30)}}.</td>
+      <tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <div  *ngIf="selectedQuote">
+    <div class="message">Mousse over  on the   message for more details</div> 
+     <app-quote-detail [quote]="selectedQuote"></app-quote-detail>
+    </div>
+  </div>
+</div>
